@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0a0f1a;
+    color: #f1f5f9;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
+
+.dark-app ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-app ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+}
+
+.dark-app * {
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .input-field {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl text-white placeholder-dark-500 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/50 transition-all duration-200 py-3 px-4;
+  }
+
+  .input-icon-left {
+    @apply absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-dark-400;
+  }
+
+  .btn-primary {
+    @apply w-full flex justify-center items-center gap-2 py-3.5 px-6 rounded-xl font-bold text-sm bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white shadow-lg shadow-primary-900/40 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98];
+  }
+}
+
+/* Markdown Rendering Styles */
+.markdown-content p { margin: 0; line-height: 1.4; }
+.markdown-content p:not(:last-child) { margin-bottom: 0.3rem !important; }
+.markdown-content ul { list-style-type: disc !important; margin: 0.3rem 0 0.3rem 1.2rem !important; padding: 0 !important; }
+.markdown-content ol { list-style-type: decimal !important; margin: 0.3rem 0 0.3rem 1.2rem !important; padding: 0 !important; }
+.markdown-content li { margin-bottom: 0.15rem !important; display: list-item !important; }
+.markdown-content strong { font-weight: 700; }
+.markdown-content h1, .markdown-content h2, .markdown-content h3 { margin: 0.3rem 0 0.1rem 0; font-size: 0.95rem; }
