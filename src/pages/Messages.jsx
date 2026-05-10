@@ -135,12 +135,24 @@ export default function Messages() {
   // WebSocket Connection
   useEffect(() => {
     const wsUrl = import.meta.env.VITE_WS_URL || 'http://localhost:8080/ws';
+    console.log("Chatbot: Intentando conectar a WebSocket en:", wsUrl);
+    
+    if (!wsUrl) {
+        console.error("Chatbot: VITE_WS_URL no está definida en las variables de entorno.");
+    }
+    
     const socket = new SockJS(wsUrl);
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
+      onConnect: () => {
+        console.log('Chatbot: Conectado con éxito al WebSocket');
+      },
+      onDisconnect: () => {
+        console.log('Chatbot: Desconectado del WebSocket');
+      }
     });
 
     client.onConnect = () => {

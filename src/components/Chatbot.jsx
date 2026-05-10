@@ -42,10 +42,13 @@ export default function Chatbot() {
     if (!user?.id || !assistant) return;
 
     const wsUrl = import.meta.env.VITE_WS_URL || 'http://localhost:8080/ws';
+    console.log("Chatbot: Intentando conectar a WebSocket en:", wsUrl);
+    
     const socket = new SockJS(wsUrl);
     const client = new Client({
       webSocketFactory: () => socket,
       onConnect: () => {
+        console.log('Chatbot: Conectado con éxito a WebSocket');
         client.subscribe(`/user/${user.id}/queue/messages`, (message) => {
           const msg = JSON.parse(message.body);
           // Solo si es un mensaje del asistente o mio para el asistente
