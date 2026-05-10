@@ -12,6 +12,12 @@ export default function Chatbot() {
   const { dark } = useThemeStore();
   const { user } = useAuthStore();
   const navigate = useNavigate();
+  
+  // LOGS DE EMERGENCIA PARA DEPURAR PRODUCCIÓN
+  console.log("Chatbot: Componente inicializado. Usuario logueado:", user?.name || "No detectado");
+  console.log("Chatbot: VITE_API_URL:", import.meta.env.VITE_API_URL);
+  console.log("Chatbot: VITE_WS_URL:", import.meta.env.VITE_WS_URL);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [messages, setMessages] = useState([]);
