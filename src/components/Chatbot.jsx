@@ -25,13 +25,18 @@ export default function Chatbot() {
   // Fetch Assistant user info
   useEffect(() => {
     const fetchAssistant = async () => {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1';
+      console.log("Chatbot: Buscando asistente en:", `${apiUrl}/users/search?name=InnControl Assistant`);
       try {
         const res = await api.get('/users/search?name=InnControl Assistant');
         if (res.data && res.data.length > 0) {
+          console.log("Chatbot: Asistente encontrado:", res.data[0].name);
           setAssistant(res.data[0]);
+        } else {
+          console.warn("Chatbot: No se encontró al usuario 'InnControl Assistant' en la base de datos.");
         }
       } catch (err) {
-        console.error("Error fetching assistant info", err);
+        console.error("Chatbot: Error al buscar asistente:", err.message);
       }
     };
     fetchAssistant();
@@ -39,10 +44,13 @@ export default function Chatbot() {
 
   // WebSocket for real-time sync
   useEffect(() => {
-    if (!user?.id || !assistant) return;
-
     const wsUrl = import.meta.env.VITE_WS_URL || 'http://localhost:8080/ws';
     console.log("Chatbot: Intentando conectar a WebSocket en:", wsUrl);
+
+    if (!user?.id || !assistant) {
+        console.log("Chatbot: Esperando a que el usuario y el asistente estén listos...");
+        return;
+    }
     
     const socket = new SockJS(wsUrl);
     const client = new Client({
