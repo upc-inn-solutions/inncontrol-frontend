@@ -399,7 +399,7 @@ export default function Chatbot() {
           </form>
           <div className="flex items-center justify-center mt-1.5 cursor-default select-none">
             <span className="text-[12px] font-semibold opacity-60 hover:opacity-100 transition-opacity" style={{ color: dark ? '#94a3b8' : '#64748b' }}>
-              Gemini 2.5 Flash
+              Gemini 1.5 Flash
             </span>
           </div>
         </div>
